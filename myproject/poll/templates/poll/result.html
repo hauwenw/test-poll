@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result: {{ question.content }}</title>
+</head>
+<body>
+    <h1>{{ question.content }}</h1>
+    <ul>
+        {% for c in question.choice_set.all %}
+            <li>{{ c.content}} -- {{ c.votes }} votes</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'question' pk=question.id %}">Vote again?</a>
+</body>
+</html>

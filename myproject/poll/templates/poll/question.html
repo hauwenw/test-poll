@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote: {{ question.content }}</title>
+</head>
+<body>
+    <h1>{{ question.content }}</h1>
+    <form method="POST" action="{% url 'question-vote' pk=question.id %}">
+        {% csrf_token %}
+        {% with choices=question.choice_set.all %}
+        {% for c in choices %}
+            <input type="radio" name="choice", value="{{ c.id }}">{{ c.content }}<br>
+        {% endfor %}
+        {% if choices %}
+            <button type="submit">vote</button>
+        {% else %}
+            <p>No choices yet.</p>
+        {% endif %}
+        {% endwith %}
+    </form>
+</body>
+</html>
