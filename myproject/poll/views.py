@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+# from django.shortcuts import render
 from django.views.generic import DetailView, ListView
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.shortcuts import redirect
 import datetime
 from .models import Question, Choice
@@ -13,7 +13,9 @@ from .models import Question, Choice
 class IndexView(ListView):
     model = Question
     template_name = 'poll/index.html'
-    queryset = Question.objects.filter(date_published__lte=datetime.datetime.now()).order_by('-date_published')
+    queryset = Question.objects.filter(
+        date_published__lte=datetime.datetime.now())\
+        .order_by('-date_published')
 
 
 class QuestionView(DetailView):
