@@ -13,9 +13,10 @@ from .models import Question, Choice
 class IndexView(ListView):
     model = Question
     template_name = 'poll/index.html'
-    queryset = Question.objects.filter(
-        date_published__lte=datetime.datetime.now())\
-        .order_by('-date_published')
+
+    def get_queryset(self):
+        return Question.objects.filter(date_published__lte=datetime.datetime.now())\
+            .order_by('-date_published')
 
 
 class QuestionView(DetailView):
